@@ -6,8 +6,12 @@ dotenv.config()
 const cors=require("cors")
 app.use(cors())
 app.use(express.json())
+const Db=process.env.DB;
 const userRoute=require("./routes/userRoute");
-mongoose.connect(process.env.URI).
+mongoose.connect(Db,{
+    useUnifiedTopology:true,
+    useNewUrlParser:true
+}).
 then(()=>{
     console.log("connected database")
     app.listen(process.env.PORT||8000,(err)=>{
